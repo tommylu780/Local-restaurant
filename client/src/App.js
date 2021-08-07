@@ -1,20 +1,24 @@
-import {BrowserRouter as Router} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import React from "react"
 import Landing from './pages/Landing'
+import Navbar from "./components/Navbar"
+import Shop from "./pages/Shop"
 
 
 const App = () => {
   return (
     <Router>
-      <Landing />
+      <div>
+      <Navbar />
+      <Switch>
+        <Route exact path ='/' component={Landing} />
+        <Route exact path ='/shop' component={Shop} />
+      </Switch>
+      </div>
     </Router>
   );
 }
 
-// const Container = styled.div`
-//   // background: #67bc98;
-//   height: 100vh;
-// `;
 
 export default App;
 

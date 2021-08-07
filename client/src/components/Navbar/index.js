@@ -2,11 +2,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+
 const Navbar = () => {
+  // function showLogin() {
+  //   if(Auth.loggedIn()){
+  //     return (
+  //       <>
+  //       <MenuLink to="/orderHistory">Order History</MenuLink>
+  //       <MenuLink href="/" onClick={() => Auth.logout()}>Logout</MenuLink>
+  //       </>
+  //     )
+  //   }else{
+  //     <>
+  //       <MenuLink to="/signup">Signup</MenuLink>
+  //       <MenuLink href="/login" onClick={() => Auth.logout()}>Login</MenuLink>
+  //     </>
+  //   }
+  // }
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Nav>
-      <Logo href="">
+      <Logo href="/">
         Local<span>Restaurant</span>
       </Logo>
       <Hamburger onClick={() => setIsOpen(!isOpen)}>
@@ -15,10 +31,8 @@ const Navbar = () => {
         <span />
       </Hamburger>
       <Menu isOpen={isOpen}>
-        <MenuLink href="">Our Work</MenuLink>
-        <MenuLink href="">About</MenuLink>
-        <MenuLink href="">Careers</MenuLink>
-        <MenuLink href="">Contact</MenuLink>
+        <MenuLink href="/">Signup</MenuLink>
+        <MenuLink href="/shop">Shop</MenuLink>
       </Menu>
     </Nav>
   );

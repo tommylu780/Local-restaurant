@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navbar from '../components/Navbar';
+// import Navbar from '../components/Navbar';
 import ImgH from '../images/hero.jpg';
 
 const Landing = () => {
     return (
         <HeroContainer>
-            <Navbar />
             <HeroContent>
                 <HeroItems>
                     <HeroH1>This is a test</HeroH1>
