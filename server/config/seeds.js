@@ -148,7 +148,7 @@ db.once('open', async () => {
       culture: cultures[3]._id,
       description:
         'slow braised Ragu of veal & pork mince with fresh egg Tagliatelle & freshly grated Parmesan.',
-      image: 'bolognese.jpeg',
+      image: 'bolognese.jpg',
       price: 25.90,
       quantity: 300
     },
@@ -166,7 +166,7 @@ db.once('open', async () => {
       culture: cultures[3]._id,
       description:
         'Bocconcini, tomato, Sugo sauce, Mozzarella, fresh basil &olive oil.',
-      image: 'margherita.jpeg',
+      image: 'margherita.jpg',
       price: 19.90,
       quantity: 600
     },
