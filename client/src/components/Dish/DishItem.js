@@ -58,7 +58,7 @@ function DishItem(item) {
                 </ul>
         </div>
         <h6>{name}</h6>
-        <p>{price}</p>
+        <p>{price}$</p>
     </div>
 </div>
   );
