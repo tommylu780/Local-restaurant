@@ -86,7 +86,7 @@ db.once('open', async () => {
       culture: cultures[0]._id,
       description:
         'include pork, prawns, diced green onion, mung bean, and bean sprouts.',
-      image: 'vpancake.jpg',
+      image: 'vpancake.jpeg',
       price: 20.00,
       quantity: 150
     },

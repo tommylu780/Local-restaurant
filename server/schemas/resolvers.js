@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Dish, Culture, Order } = require('../models');
 const { signToken } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('pk_test_51JNyFPHDnv6cOa0aA2zqSvaiHFYxSEOb8VpzfeJo4FenWQh8ZymDdedGzlGfF9UIzmcnjiiuvacJlz57jI8HA8zQ00JYJl50eb');
 
 const resolvers = {
   Query: {
@@ -63,7 +63,7 @@ const resolvers = {
         const dish = await stripe.dishes.create({
           name: dishes[i].name,
           description: dishes[i].description,
-          images: [`${url}/images/${dishes[i].image}`]
+          images: [`/images/foods/${dishes[i].image}`]
         });
 
         const price = await stripe.prices.create({
