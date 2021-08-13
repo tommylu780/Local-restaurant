@@ -61,7 +61,7 @@ const Login = () => {
 }
 
 export const MainContainer = styled.div`
-  margin: 10rem 0 0 60rem;
+  margin: 10rem 0 0 45rem;
   display: flex;
   align-items: center;
   flex-direction: column;
