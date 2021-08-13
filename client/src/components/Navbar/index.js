@@ -1,24 +1,29 @@
 
 import React, { useState } from "react";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Auth from "../../utils/auth";
 
-
-const Navbar = () => {
-  // function showLogin() {
-  //   if(Auth.loggedIn()){
-  //     return (
-  //       <>
-  //       <MenuLink to="/orderHistory">Order History</MenuLink>
-  //       <MenuLink href="/" onClick={() => Auth.logout()}>Logout</MenuLink>
-  //       </>
-  //     )
-  //   }else{
-  //     <>
-  //       <MenuLink to="/signup">Signup</MenuLink>
-  //       <MenuLink href="/login" onClick={() => Auth.logout()}>Login</MenuLink>
-  //     </>
-  //   }
-  // }
+function Navbar() {
+  function showLogin() {
+    if(!Auth.loggedIn()){
+      return (
+        <>
+          <MenuLink href="/signup">Signup</MenuLink>
+          <MenuLink href="/login" onClick={() => Auth.logout()}>Login</MenuLink>
+        </>
+      );
+    }else{
+      return(
+        <>  
+            <MenuLink href="/orderHistory">Order History</MenuLink>
+            <MenuLink href="/shop">Shop</MenuLink>
+            <MenuLink href="/" onClick={() => Auth.logout()}>Logout</MenuLink>
+        </> 
+      )
+         
+    }  
+  }
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Nav>
@@ -30,9 +35,8 @@ const Navbar = () => {
         <span />
         <span />
       </Hamburger>
-      <Menu isOpen={isOpen}>
-        <MenuLink href="/">Signup</MenuLink>
-        <MenuLink href="/shop">Shop</MenuLink>
+      <Menu isOpen={isOpen} >
+          {showLogin()}
       </Menu>
     </Nav>
   );

@@ -1,36 +1,73 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useEffect } from 'react';
+import DishItem from './DishItem';
+import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_DISHES } from '../../utils/actions';
+import { useQuery } from '@apollo/client';
+import { QUERY_DISHES } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
+import spinner from '../../assets/spinner.gif';
+import styled from 'styled-components';
 
-export const Menu = (menuItem) => {
-    return (
-        <MenuItemStyled >
-            {
-                menuItem.map((item)=>{
-                    return <div className="grid-item" key={item.id}>
-                        <div className="portfolio-content">
-                            <div className="portfolio-image">
-                                <img src={item.image} alt=""/>
-                                <ul>
-                                    <li>
-                                        <a href={item.link1}>
-                                            Github
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href={item.link2}>
-                                            FB
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h6>{item.title}</h6>
-                            <p>{item.text}</p>
-                        </div>
-                    </div>
-                })
-            }
-        </MenuItemStyled>
-    )
+function DishList() {
+  const [state, dispatch] = useStoreContext();
+
+  const { currentCulture } = state;
+
+  const { loading, data } = useQuery(QUERY_DISHES);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_DISHES,
+        dishes: data.dishes,
+      });
+      data.dishes.forEach((dish) => {
+        idbPromise('dishes', 'put', dish);
+      });
+    } else if (!loading) {
+      idbPromise('dishes', 'get').then((dishes) => {
+        dispatch({
+          type: UPDATE_DISHES,
+          dishes: dishes,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
+
+  function filterDishes() {
+    if (!currentCulture) {
+      return state.dishes;
+    }
+
+    return state.dishes.filter(
+      (dish) => dish.culture._id === currentCulture
+    );
+  }
+
+  return (
+    <div className="my-2">
+      <h2>Our Dishes:</h2>
+      {state.dishes.length ? (
+        <div className="flex-row">
+          <MenuItemStyled >
+          {filterDishes().map((dish) => (
+            <DishItem
+              key={dish._id}
+              _id={dish._id}
+              image={dish.image}
+              name={dish.name}
+              price={dish.price}
+              quantity={dish.quantity}
+            />
+          ))}
+          </MenuItemStyled>
+        </div>
+      ) : (
+        <h3>You haven't added any dishes yet!</h3>
+      )}
+      {loading ? <img src={spinner} alt="loading" /> : null}
+    </div>
+  );
 }
 
 const MenuItemStyled = styled.div`
@@ -44,12 +81,17 @@ const MenuItemStyled = styled.div`
         grid-template-columns: repeat(1, 1fr);
     }
     .grid-item{
-        .portfolio-content{
+        .items-content{
             display: block;
             position: relative;
             overflow: hidden;
             h6{
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+                margin: 0 0 5px 0;
+            }
+            p{
+                font-size: 1rem;
+                margin: 0 0 5px 0;
             }
             img{
                 width: 100%;
@@ -64,7 +106,7 @@ const MenuItemStyled = styled.div`
                 top: 40%;
                 opacity: 0;
                 li{
-                        background-color: var(--border-color);
+                        background-color: #2e344e;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -75,10 +117,11 @@ const MenuItemStyled = styled.div`
                         margin: 0 .5rem;
                         transition: all .4s ease-in-out;
                         &:hover{
-                            background-color: var(--primary-color);
+                            background-color: #007bff;
                         }
                         a{
                             display: flex;
+                            color: #fff;
                             align-items: center;
                             justify-content: center;
                             transition: all .4s ease-in-out;
@@ -86,7 +129,7 @@ const MenuItemStyled = styled.div`
                     }
             }
 
-            .portfolio-image{
+            .items-image{
                 &::before{
                     content: "";
                     position: absolute;
@@ -97,7 +140,7 @@ const MenuItemStyled = styled.div`
                     transition: all .4s ease-in-out;
                 }
             }
-            .portfolio-image:hover{
+            .items-image:hover{
                 ul{
                     transform: translateY(0);
                     transform: translate(-50%, -50%);
@@ -109,7 +152,7 @@ const MenuItemStyled = styled.div`
                     li{
                         transition: all .4s ease-in-out;
                         &:hover{
-                            background-color: var(--primary-color);
+                            background-color: grey;
                         }
                         a{
                             display: flex;
@@ -121,7 +164,7 @@ const MenuItemStyled = styled.div`
 
                     li:hover{
                         svg{
-                            color: var(--white-color);
+                            color: #fff;
                         }
                     }
                     svg{
@@ -129,7 +172,7 @@ const MenuItemStyled = styled.div`
                     }
                 }
                 &::before{
-                    height: calc(100% - 32%) ;
+                    height: calc(100% - 30%) ;
                     width: calc(100% - 4%);
                     background-color: white;
                     opacity: 0.9;
@@ -141,4 +184,5 @@ const MenuItemStyled = styled.div`
         }
     }
 `;
-export default Menu
+
+export default DishList;
