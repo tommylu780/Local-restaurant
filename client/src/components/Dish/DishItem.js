@@ -46,13 +46,13 @@ function DishItem(item) {
                 <ul>
                     <li>
                         <Link to={`/products/${_id}`}>
-                          <a>View</a>
+                          <p>View</p>
                         </Link>
                             
                     </li>
                     <li>
                         <Link onClick={addToCart}>
-                            <a>Add to Cart</a>
+                            <p>Add to Cart</p>
                         </Link>
                     </li>
                 </ul>
