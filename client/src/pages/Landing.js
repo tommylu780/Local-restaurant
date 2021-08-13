@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 // import Navbar from '../components/Navbar';
-import ImgH from '../images/hero.jpg';
+import ImgH from '../assets/hero.jpg';
 
 const Landing = () => {
     return (
         <HeroContainer>
             <HeroContent>
                 <HeroItems>
-                    <HeroH1>This is a test</HeroH1>
-                    <HeroP>Come to our shop</HeroP>
+                    <HeroH1>Shop is open</HeroH1>
+                    <HeroP>Welcome</HeroP>
                     <HeroBtn>Order now</HeroBtn>
                 </HeroItems>
             </HeroContent>
