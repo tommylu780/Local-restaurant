@@ -55,11 +55,21 @@ const HeroH1 = styled.div`
     margin-bottom: 1rem;
     box-shadow: 3px 5px #e9ba23;
     letter-spacing: 3px;
+    
+    @media screen and (max-width: 425px){
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: 1.5px;
+    }
 `;
 
 const HeroP = styled.div`
     font-size: clamp(2rem, 2.5vw, 3rem);
     margin-bottom: 2rem;
+
+    @media screen and (max-width: 425px){
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        letter-spacing: 1.5px;
+    }
 `;
 
 const HeroBtn = styled.div`
@@ -75,6 +85,10 @@ const HeroBtn = styled.div`
         transition: 0.2s ease-out;
         cursor: pointer;
         color: #000;
+    }
+
+    @media screen and (max-width: 425px){
+        font-size: 1rem;
     }
 `;
 
