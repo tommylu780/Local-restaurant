@@ -20,7 +20,7 @@ body {
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 3rem;
   font-family: 'Karla', sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -112,4 +112,6 @@ header a {
   color: var(--light);
 }
 
-
+.list-container{
+  justify-content: center;
+}

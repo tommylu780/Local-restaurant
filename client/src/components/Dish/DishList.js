@@ -45,10 +45,10 @@ function DishList() {
   }
 
   return (
-    <div className="my-2">
+    <div className="list-container">
       <h2>Our Dishes:</h2>
       {state.dishes.length ? (
-        <div className="flex-row">
+        <div>
           <MenuItemStyled >
           {filterDishes().map((dish) => (
             <DishItem
@@ -63,12 +63,23 @@ function DishList() {
           </MenuItemStyled>
         </div>
       ) : (
-        <h3>You haven't added any dishes yet!</h3>
+        <LoadingD>
+        <h3>Loading Dishes</h3>
+        </LoadingD>  
       )}
+      <LoadingD>
       {loading ? <img src={spinner} alt="loading" /> : null}
+      </LoadingD>
+      
     </div>
   );
 }
+
+const LoadingD = styled.div`
+  display: flex;
+  justify-content: center;
+
+`;
 
 const MenuItemStyled = styled.div`
     display: grid;
